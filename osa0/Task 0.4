@@ -1,0 +1,36 @@
+title Task 0.4
+
+user->browser:
+note left of browser
+Write the new note
+Click the save button
+end note
+browser->server: POST fullstack-exampleapp.herokuapp.com/new_note
+note left of server
+  sends the data in the input field "note"
+end note
+server->browser: status 302, (tells to send GET)
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/notes
+note left of server
+  Sends back the HTML for notes page
+end note
+server->browser: status 200, notes
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/main.css
+server->browser: status 200, main.css
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/main.js
+server->browser: status 200, main.js
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/data.json
+server->browser: status 200, data.json
+
+
+note left of browser
+ Browser displays the webpage
+ with the CSS format and the JSON 
+ data which now contains the new 
+ note
+ 
+end note

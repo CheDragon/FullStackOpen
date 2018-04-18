@@ -1,0 +1,28 @@
+title Task 0.3
+
+user->browser:
+note left of browser
+user clicks on the link
+fullstack-exampleapp.herokuapp.com/notes
+end note
+browser->server: GET fullstack-exampleapp.herokuapp.com/notes
+note left of server
+  muodostetaan HTML missä olemassaolevien
+  muistiinpanojen lukumäärä päivitettynä
+end note
+server->browser: status 200, sivun HTML-koodi
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/main.css
+server->browser: status 200, main.css
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/main.js
+server->browser: status 200, main.js
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/data.json
+server->browser: status 200, data.json
+
+
+note left of browser
+ Browser displays the webpage
+ with the CSS format and the JSON data
+end note

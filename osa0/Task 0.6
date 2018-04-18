@@ -1,0 +1,19 @@
+title Task 0.6
+
+user->browser:
+note left of browser
+user writes a new note and press save
+on fullstack-exampleapp.herokuapp.com/spa
+end note
+
+
+note left of browser
+ The browser (spa.js) adds the note 
+ and redraws them on the page
+end note
+
+browser->server: POST fullstack-exampleapp.herokuapp.com/new_note_spa
+note left of server
+  Sends post to save the new note
+end note
+server->browser: status 201

@@ -1,0 +1,28 @@
+ title Task 0.5
+
+user->browser:
+note left of browser
+user goes to the address
+fullstack-exampleapp.herokuapp.com/spa
+end note
+browser->server: GET fullstack-exampleapp.herokuapp.com/spa
+note left of server
+  Server gets a GET request and sends the data
+end note
+
+server->browser: status 200, HTML code 
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/main.css
+server->browser: status 200, main.css
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/spa.js
+server->browser: status 200, spa.js
+
+browser->server: GET fullstack-exampleapp.herokuapp.com/data.json
+server->browser: status 200, data.json
+
+
+note left of browser
+ Browser displays the webpage
+ with the CSS format and the JSON data
+end note
