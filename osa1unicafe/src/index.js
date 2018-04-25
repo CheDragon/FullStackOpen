@@ -2,8 +2,40 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+const Button = ({ handleClick, text }) => {
 
-class Palautetta extends React.Component {
+  return (
+    <button onClick={ handleClick }>
+      { text }
+    </button>
+  )
+}
+
+
+
+const Statistic = ({text, number}) => {
+
+  if( !isNaN(number) && (text === 'positiivisia') ){
+    return (   <div>{ text }  { number } % </div> );
+  } else if( !isNaN(number) ){
+    return ( <div>{ text } { number }</div> );
+  } else if( isNaN(number) )
+    return ( <div>{ text } 0</div> );
+}
+
+
+const Statistics = ({stats}) => (
+  <div>
+    <h2>statistiikka</h2>
+    <Statistic text="hyvä" number={stats.good} />
+    <Statistic text="neutraali" number={stats.neutral} />
+    <Statistic text="huono" number={stats.bad} />
+    <Statistic text="keskiarvo" number={((stats.good-stats.bad)/(stats.good + stats.neutral + stats.bad)).toFixed(1)} />
+    <Statistic text="positiivisia" number={(((stats.good)/(stats.good + stats.neutral + stats.bad)) * 100).toFixed(1)} />
+  </div>
+)
+
+class App extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -13,25 +45,16 @@ class Palautetta extends React.Component {
     }
   }
 
-  calculateKeskiarvo() {
-    let keskiarvo = (this.state.good-this.state.bad)/(this.state.good + this.state.neutral + this.state.bad);
-
-    if( isNaN(keskiarvo) ){
-      return 0;
-    } else {
-      return keskiarvo.toFixed(1);
-    }
-
+  increaseGood = () => {
+    this.setState({ good: this.state.good + 1});
   }
 
-  calculatePositiivisia() {
-    let positiivisia = ((this.state.good)/(this.state.good + this.state.neutral + this.state.bad)) * 100;
+  increaseNeutral = () => {
+    this.setState({ neutral: this.state.neutral + 1});
+  }
 
-    if( isNaN(positiivisia) ){
-      return 0;
-    } else {
-      return positiivisia.toFixed(1);
-    }
+  increaseBad = () => {
+    this.setState({ bad: this.state.bad + 1});
   }
 
   render() {
@@ -39,31 +62,16 @@ class Palautetta extends React.Component {
       <div>
         <h2>anna palautetta</h2>
 
-        <button onClick={ () => this.setState({ good: this.state.good + 1}) }>hyvä</button>
-        <button onClick={ () => this.setState({ neutral: this.state.neutral + 1}) }>neutraali</button>
-        <button onClick={ () => this.setState({ bad: this.state.bad + 1}) }>huono</button>
+        <Button handleClick={ this.increaseGood } text="hyvä" />
+        <Button handleClick={ this.increaseNeutral } text="neutraali" />
+        <Button handleClick={ this.increaseBad } text="huono" />
 
-        <h2>statistiikka</h2>
-        hyvä: { this.state.good } <br/>
-        neutraali { this.state.neutral }<br/>
-        huono { this.state.bad }<br/>
-        keskiarvo { this.calculateKeskiarvo() }<br/>
-        positiivisia { this.calculatePositiivisia() } %<br/>
+        <Statistics stats={ this.state } />
 
       </div>
     )
   }
 }
 
-
-
-const App = () => {
-
-  return(
-    <div>
-      <Palautetta />
-    </div>
-  )
-}
 
 ReactDOM.render(<App />, document.getElementById('root'));
