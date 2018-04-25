@@ -24,16 +24,29 @@ const Statistic = ({text, number}) => {
 }
 
 
-const Statistics = ({stats}) => (
-  <div>
-    <h2>statistiikka</h2>
-    <Statistic text="hyvä" number={stats.good} />
-    <Statistic text="neutraali" number={stats.neutral} />
-    <Statistic text="huono" number={stats.bad} />
-    <Statistic text="keskiarvo" number={((stats.good-stats.bad)/(stats.good + stats.neutral + stats.bad)).toFixed(1)} />
-    <Statistic text="positiivisia" number={(((stats.good)/(stats.good + stats.neutral + stats.bad)) * 100).toFixed(1)} />
-  </div>
-)
+const Statistics = ({stats}) => {
+
+
+  if( stats.good === 0 && stats.neutral === 0 && stats.bad === 0  ){
+    return (
+      <div>
+        <h2>statistiikka</h2>
+        ei yhtään palautetta annettu
+      </div>
+    )
+  } else {
+    return(
+      <div>
+        <h2>statistiikka</h2>
+        <Statistic text="hyvä" number={stats.good} />
+        <Statistic text="neutraali" number={stats.neutral} />
+        <Statistic text="huono" number={stats.bad} />
+        <Statistic text="keskiarvo" number={((stats.good-stats.bad)/(stats.good + stats.neutral + stats.bad)).toFixed(1)} />
+        <Statistic text="positiivisia" number={(((stats.good)/(stats.good + stats.neutral + stats.bad)) * 100).toFixed(1)} />
+      </div>
+    )
+  }
+}
 
 class App extends React.Component {
   constructor() {
