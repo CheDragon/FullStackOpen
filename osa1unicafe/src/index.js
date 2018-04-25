@@ -16,11 +16,11 @@ const Button = ({ handleClick, text }) => {
 const Statistic = ({text, number}) => {
 
   if( !isNaN(number) && (text === 'positiivisia') ){
-    return (   <div>{ text }  { number } % </div> );
+    return (   <tr><td>{ text }</td><td>{ number }%</td></tr> );
   } else if( !isNaN(number) ){
-    return ( <div>{ text } { number }</div> );
+    return ( <tr><td>{ text }</td><td>{ number }</td></tr> );
   } else if( isNaN(number) )
-    return ( <div>{ text } 0</div> );
+    return ( <tr><td>{ text }</td><td>0</td></tr> );
 }
 
 
@@ -38,11 +38,16 @@ const Statistics = ({stats}) => {
     return(
       <div>
         <h2>statistiikka</h2>
-        <Statistic text="hyvä" number={stats.good} />
-        <Statistic text="neutraali" number={stats.neutral} />
-        <Statistic text="huono" number={stats.bad} />
-        <Statistic text="keskiarvo" number={((stats.good-stats.bad)/(stats.good + stats.neutral + stats.bad)).toFixed(1)} />
-        <Statistic text="positiivisia" number={(((stats.good)/(stats.good + stats.neutral + stats.bad)) * 100).toFixed(1)} />
+
+        <table>
+        <tbody>
+          <Statistic text="hyvä" number={stats.good} />
+          <Statistic text="neutraali" number={stats.neutral} />
+          <Statistic text="huono" number={stats.bad} />
+          <Statistic text="keskiarvo" number={((stats.good-stats.bad)/(stats.good + stats.neutral + stats.bad)).toFixed(1)} />
+          <Statistic text="positiivisia" number={(((stats.good)/(stats.good + stats.neutral + stats.bad)) * 100).toFixed(1)} />
+        </tbody>
+        </table>
       </div>
     )
   }
