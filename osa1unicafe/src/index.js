@@ -58,16 +58,8 @@ class App extends React.Component {
     }
   }
 
-  increaseGood = () => {
-    this.setState({ good: this.state.good + 1});
-  }
-
-  increaseNeutral = () => {
-    this.setState({ neutral: this.state.neutral + 1});
-  }
-
-  increaseBad = () => {
-    this.setState({ bad: this.state.bad + 1});
+  increaseStats = (stateToIncrease) => {
+    this.setState({ [stateToIncrease]: this.state[stateToIncrease] + 1});
   }
 
   render() {
@@ -75,9 +67,9 @@ class App extends React.Component {
       <div>
         <h2>anna palautetta</h2>
 
-        <Button handleClick={ this.increaseGood } text="hyvä" />
-        <Button handleClick={ this.increaseNeutral } text="neutraali" />
-        <Button handleClick={ this.increaseBad } text="huono" />
+        <Button handleClick={ () => this.increaseStats("good") } text="hyvä" />
+        <Button handleClick={ () => this.increaseStats("neutral") } text="neutraali" />
+        <Button handleClick={ () => this.increaseStats("bad") } text="huono" />
 
         <Statistics stats={ this.state } />
 
