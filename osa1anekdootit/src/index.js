@@ -12,8 +12,6 @@ class App extends React.Component {
     }
   }
 
-
-
   selectRandom = () => {
     let randomNum = Math.floor(Math.random() * anecdotes.length);
     this.setState({ selected: randomNum});
@@ -26,15 +24,22 @@ class App extends React.Component {
   }
 
   render() {
+      const mostVotesIndex = this.state.votes.indexOf(Math.max(...this.state.votes));
+
     return (
       <div>
         {this.props.anecdotes[this.state.selected]} <br/>
         Anecdote has {this.state.votes[this.state.selected]} votes    <br/>
         <button onClick={ () => this.voteAnecdote() }>vote</button>
         <button onClick={ () => this.selectRandom() }>next anecdote</button>
+        <br/>
+        <h2>Anecdote with most votes:</h2>
+        {this.props.anecdotes[mostVotesIndex]} <br />
+        Has {this.state.votes[mostVotesIndex]} votes!
       </div>
     )
   }
+
 }
 
 const anecdotes = [
