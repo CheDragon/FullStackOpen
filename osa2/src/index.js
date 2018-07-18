@@ -30,10 +30,9 @@ const Sisalto = (props) => {
 
 const Yhteensa = (props) => {
   const osat = props.kurssi.osat
-  let yhteensa = 0
-  for(let i=0; i<osat.length; i++){
-    yhteensa += osat[i].tehtavia
-  }
+
+  var yhteensa = osat.reduce( ( accumulator, currentValue ) => accumulator + currentValue.tehtavia, 0);
+
   return (
     <div>
       <p>yhteensä { yhteensa } tehtävää</p>
