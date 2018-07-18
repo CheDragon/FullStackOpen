@@ -55,8 +55,10 @@ const Kurssi = (props) => {
 
 
 const App = () => {
-  const kurssi = {
+  const kurssit = [
+  {
     nimi: 'Half Stack -sovelluskehitys',
+    id: 1,
     osat: [
       {
         nimi: 'Reactin perusteet',
@@ -74,11 +76,28 @@ const App = () => {
         id: 3
       }
     ]
+  },
+  {
+    nimi: 'Node.js',
+    id: 2,
+    osat: [
+      {
+        nimi: 'Routing',
+        tehtavia: 3,
+        id: 1
+      },
+      {
+        nimi: 'Middlewaret',
+        tehtavia: 7,
+        id: 2
+      }
+    ]
   }
+]
 
   return (
     <div>
-      <Kurssi kurssi={kurssi} />
+      {kurssit.map((kurssi , i) => <Kurssi key={i} kurssi={kurssi} />)}
     </div>
   )
 }
