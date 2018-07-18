@@ -28,13 +28,18 @@ const Sisalto = (props) => {
   )
 }
 
-// const Yhteensa = (props) => {
-//   return (
-//     <div>
-//       <p>yhteensä { props.kurssi.osat[0].tehtavia + props.kurssi.osat[1].tehtavia + props.kurssi.osat[2].tehtavia } tehtävää</p>
-//     </div>
-//   )
-// }
+const Yhteensa = (props) => {
+  const osat = props.kurssi.osat
+  let yhteensa = 0
+  for(let i=0; i<osat.length; i++){
+    yhteensa += osat[i].tehtavia
+  }
+  return (
+    <div>
+      <p>yhteensä { yhteensa } tehtävää</p>
+    </div>
+  )
+}
 
 
 const Kurssi = (props) => {
@@ -44,7 +49,7 @@ const Kurssi = (props) => {
     <div>
       <Otsikko  kurssi={ kurssi } />
       <Sisalto  kurssi={ kurssi } />
-      {/*  <Yhteensa kurssi={ kurssi } />*/ }
+      <Yhteensa kurssi={ kurssi } />
     </div>
   )
 }
